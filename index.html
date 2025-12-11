@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VirtualOffice - Remote Operations Platform</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/messenger.css">
+</head>
+
+<body>
+    <!-- Error Reporting Overlay -->
+    <div id="debug-error"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; background: #fee; color: #c00; padding: 20px; border-bottom: 2px solid #c00; z-index: 9999; font-family: monospace;">
+        <h3>⚠️ Application Error</h3>
+        <pre id="debug-error-msg"></pre>
+    </div>
+    <script>
+        window.onerror = function (msg, url, line, col, error) {
+            document.getElementById('debug-error').style.display = 'block';
+            document.getElementById('debug-error-msg').textContent = `${msg}\n\nAt: ${url}:${line}:${col}`;
+            return false;
+        };
+        window.addEventListener('unhandledrejection', function (event) {
+            document.getElementById('debug-error').style.display = 'block';
+            document.getElementById('debug-error-msg').textContent = `Promise Rejection: ${event.reason}`;
+        });
+    </script>
+
+    <div id="app">
+        <div
+            style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; color: #666;">
+            <h2>Loading VirtualOffice...</h2>
+        </div>
+    </div>
+
+    <!-- Scripts (Loaded Sequentially) -->
+    <script src="js/store.js?v=6"></script>
+    <script src="js/router.js?v=6"></script>
+
+    <!-- Pages -->
+    <script src="js/pages/landing_auth.js?v=6"></script>
+    <script src="js/pages/home.js?v=6"></script>
+    <script src="js/pages/login.js?v=6"></script>
+    <script src="js/pages/register.js?v=6"></script>
+    <script src="js/pages/department_detail.js?v=6"></script>
+    <script src="js/pages/dashboard.js?v=6"></script>
+    <script src="js/pages/feed.js?v=6"></script>
+    <script src="js/pages/profile.js?v=6"></script>
+    <script src="js/pages/messages.js?v=6"></script>
+
+    <!-- Main App -->
+    <script src="js/app.js?v=6"></script>
+</body>
+
+</html>
